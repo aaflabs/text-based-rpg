@@ -2,6 +2,9 @@
 
 using namespace std;
 
+#ifndef GAMECHARACTER_H
+#define GAMECHARACTER_H
+
 class GameCharacter
 {
 
@@ -12,3 +15,5 @@ public:
     int takeDamage(int);
     bool checkIsDead();
 };
+
+#endif
