@@ -2,7 +2,7 @@
 
 Item::Item(string n, int h, int a, int d) {
     name = n;
-    heatlh = h;
+    health = h;
     attack = a;
     defence = d;
 }
