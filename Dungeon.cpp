@@ -122,6 +122,58 @@ void Dungeon::handleEmptyRoom(Room * room) {
     }
 }
 
+void Dungeon::handleMovementActions(Room * room) {
+    while (true) {
+        if (room->pos == 0) {
+            string actions[] = {"a. Move right", "b. Move down"};
+            printActions(2, actions);
+            string input;
+            cin >> input;
+            if (input == "a") {
+                player.changeRooms(&rooms[1]);
+            } else if (input == "b") {
+                player.changeRooms(&rooms[2]); 
+            } else {
+                cout << "Accion incorrecta \n";
+            }
+        } else if (room->pos == 1) {
+            string actions[] = {"a. Move left"};
+            printActions(1, actions);
+            string input;
+            cin >> input;
+            if (input == "a") {
+                player.changeRooms(&rooms[0]);
+            } else {
+                cout << "Accion incorrecta \n";
+            }
+
+        } else if (room->pos == 2) {
+            string actions[] = {"a. Move up", "b. Move right"};
+            printActions(2, actions);
+            string input;
+            cin >> input;
+            if (input == "a") {
+                player.changeRooms(&rooms[0]);
+            } else if (input == "b") {
+                player.changeRooms(&rooms[3]); 
+            } else {
+                cout << "Accion incorrecta \n";
+            }
+            
+        } else {
+            string actions[] = {"a. Move left"};
+            printActions(1, actions);
+            string input;
+            cin >> input;
+            if (input == "a") {
+                player.changeRooms(&rooms[2]);
+            } else {
+                cout << "Accion incorrecta \n";
+            }
+        }
+    }
+}
+
 void Dungeon::enterRoom(Room * room) {
     if (room->enemies.size() != 0) {
         handleRoomWithEnemy(room);
@@ -139,5 +191,6 @@ int Dungeon::runDungeon() {
     while (true)
     {
         enterRoom(player.currentRoom);
+        handleMovementActions(player.currentRoom);
     }
 }
