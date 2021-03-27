@@ -16,7 +16,7 @@ public:
     void handleRoomWithChest(Room *);
     void handleRoomWithEnemy(Room *);
     void handleLootActions(Room *);
-    void handleFightActions(Room *);
+    void handleFightActions(GameCharacter *);
     void handleMovementActions(Room *);
     void printActions(int, string[]);
     int performEndGameLogic();
