@@ -184,6 +184,23 @@ void Dungeon::enterRoom(Room * room) {
     }
 }
 
+int Dungeon::performEndGameLogic() {
+    string actions[] = {"a. Yes", "b. No"};
+    while (true)
+    {
+        printActions(2, actions);
+        string input;
+        cin >> input;
+        if (input == "a") {
+            return 1;
+        } else if (input == "b") {
+            return 0;
+        } else {
+            cout << "Accion incorrecta \n";
+        }       
+    }   
+}
+
 int Dungeon::runDungeon() {
     cout << "Bienvenido a la mazmorra, dentro encontrarás tesoros pero tambien a los enemigos que los protegen.\n";
     player.currentRoom = &rooms[0];
@@ -191,6 +208,17 @@ int Dungeon::runDungeon() {
     while (true)
     {
         enterRoom(player.currentRoom);
+        if (player.checkIsDead()) {
+            cout << "Game over, jugar otra partida?\n";
+            return performEndGameLogic();
+        } else {
+            if (player.currentRoom->isExit) {
+                if (player.currentRoom->enemies.size() == 0) {
+                    cout << "Has ganado, jugar otra partida?\n";
+                    return performEndGameLogic();
+                }
+            }
+        }
         handleMovementActions(player.currentRoom);
     }
 }
